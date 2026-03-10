@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Buggy Cars Rating – QA Automation | Johan Ballen</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:'Inter',sans-serif;
+line-height:1.6;
+color:#0f1724;
+background:#fbfdff;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:0 2rem;
+}
+
+.header{
+background:#0A192F;
+color:white;
+padding:2.5rem 0;
+text-align:center;
+}
+
+.header h1{
+font-size:2.3rem;
+color:#64ffda;
+margin-bottom:.4rem;
+}
+
+.header p{
+opacity:.85;
+}
+
+.content{
+padding:3rem 0;
+}
+
+.back-btn{
+display:inline-flex;
+align-items:center;
+gap:.5rem;
+background:#64ffda;
+color:#0A192F;
+padding:.7rem 1.4rem;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+margin-bottom:2rem;
+transition:.3s;
+}
+
+.back-btn:hover{
+background:#4db6ac;
+transform:translateY(-2px);
+}
+
+.section{
+background:white;
+padding:2rem;
+border-radius:14px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+margin-bottom:2rem;
+}
+
+.section h2{
+font-size:1.6rem;
+margin-bottom:1.2rem;
+border-bottom:3px solid #64ffda;
+padding-bottom:.4rem;
+color:#0A192F;
+}
+
+.section p{
+margin-bottom:1rem;
+}
+
+.overview-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:1.2rem;
+margin-top:1.5rem;
+}
+
+.overview-item{
+background:#f7fbff;
+padding:1.3rem;
+border-radius:10px;
+text-align:center;
+}
+
+.overview-item i{
+font-size:1.7rem;
+color:#64ffda;
+margin-bottom:.6rem;
+}
+
+.link-buttons{
+display:flex;
+flex-wrap:wrap;
+gap:1rem;
+margin-top:1.2rem;
+}
+
+.link-btn{
+display:inline-flex;
+align-items:center;
+gap:.5rem;
+background:#0A192F;
+color:white;
+padding:.7rem 1.2rem;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+transition:.25s;
+}
+
+.link-btn:hover{
+background:#64ffda;
+color:#0A192F;
+transform:translateY(-2px);
+}
+
+iframe{
+border:none;
+border-radius:10px;
+margin-top:1rem;
+}
+
+@media(max-width:768px){
+
+.container{
+padding:0 1rem;
+}
+
+.header h1{
+font-size:1.8rem;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header class="header">
+
+<div class="container">
+
+<h1>Buggy Cars Rating – QA Automation</h1>
+<p>Automatización de pruebas con Cypress e integración CI/CD</p>
+
+</div>
+
+</header>
+
+
+<main class="content">
+
+<div class="container">
+
+
+<a href="../index.html" class="back-btn">
+
+<i class="fas fa-arrow-left"></i>
+Volver al portafolio
+
+</a>
+
+
+
+<!-- DESCRIPCION -->
+
+<div class="section">
+
+<h2><i class="fas fa-info-circle"></i> Descripción del proyecto</h2>
+
+<p>
+
+Proyecto de automatización de pruebas funcionales sobre la plataforma Buggy Cars Rating, desarrollado con Cypress 15.  
+Se implementaron 8 Historias de Usuario con más de 50 casos de prueba cubriendo los flujos de registro, autenticación, gestión de perfil, navegación, votación y filtrado de automóviles.
+
+</p>
+
+<p>
+
+Se aplicó el patrón Page Object Model para separar la lógica de interacción de los casos de prueba, fixtures para centralizar los datos de prueba, y custom commands (cy.login(), cy.logout(), cy.navegarA()) para encapsular acciones reutilizables a lo largo de la suite.  
+
+En los flujos que involucran comunicación con el backend se utilizaron pruebas de integración mediante cy.intercept(), validando método HTTP, cuerpo del request y código de respuesta.
+
+</p>
+
+<p>
+
+La infraestructura de ejecución está montada sobre una máquina virtual Linux (Ubuntu 24.04) con Docker Engine instalado. Jenkins corre dentro de un contenedor Docker con acceso al socket del host mediante socket binding, permitiendo levantar contenedores hermanos desde el pipeline. Las pruebas se ejecutan en un contenedor efímero basado en la imagen oficial <strong>cypress/included:15.9.0</strong>, montando el workspace como volumen compartido.
+
+</p>
+
+<p>
+
+El pipeline declarativo en Jenkins automatiza el ciclo completo: instalación de dependencias, ejecución de pruebas, generación de reporte y publicación. Los resultados se procesan con Mochawesome y el reporte HTML se despliega automáticamente en GitHub Pages desde una rama dedicada, quedando accesible públicamente tras cada ejecución.
+
+</p>
+
+<p>
+
+El pipeline implementa manejo de errores con try/catch garantizando que el reporte se publique independientemente del resultado de los tests, marcando el build como FAILURE cuando alguna prueba falla.
+
+</p>
+
+</div>
+
+<!-- HISTORIAS DE USUARIO -->
+
+<div class="section">
+
+  <h2><i class="fas fa-book-open"></i> Historias de Usuario</h2>
+
+  <p>
+    Documento con las 8 Historias de Usuario definidas para el proyecto,
+    incluyendo criterios de aceptación.
+  </p>
+
+  <iframe
+    src="../docs/HU-Buggy_Cars.pdf"
+    width="100%"
+    height="650">
+  </iframe>
+
+</div>
+
+
+<!-- PLAN DE PRUEBAS -->
+
+<div class="section">
+
+<h2><i class="fas fa-file-pdf"></i> Plan de Pruebas</h2>
+
+<p>
+Documento que define alcance, estrategia de testing, criterios de entrada y salida,
+riesgos y tipos de pruebas aplicados al proyecto.
+</p>
+
+<iframe
+src="../docs/plan-pruebas-buggy-cars.pdf"
+width="100%"
+height="650">
+</iframe>
+
+</div>
+
+
+
+<!-- CASOS DE PRUEBA -->
+
+<div class="section">
+
+<h2><i class="fas fa-table"></i> Casos de Prueba</h2>
+
+<p>
+Los casos de prueba fueron documentados y ejecutados utilizando una matriz
+de testing estructurada que cubre los flujos funcionales principales del sistema.
+</p>
+
+<iframe
+src="https://docs.google.com/spreadsheets/d/e/TU_SHEET_ID/pubhtml?widget=true&headers=false"
+width="100%"
+height="650">
+</iframe>
+
+</div>
+
+
+
+<!-- EXPLORATORY TESTING -->
+
+<div class="section">
+
+<h2><i class="fas fa-search"></i> Exploratory Testing</h2>
+
+<p>
+Documento con escenarios exploratorios ejecutados para identificar
+comportamientos inesperados, problemas de usabilidad y defectos
+fuera de los flujos previamente definidos.
+</p>
+
+<iframe
+src="../docs/exploratory-testing-buggy.pdf"
+width="100%"
+height="650">
+</iframe>
+
+</div>
+
+
+
+<!-- AUTOMATIZACION -->
+
+<div class="section">
+
+<h2><i class="fas fa-robot"></i> Automatización Cypress</h2>
+
+<p>
+El código fuente de la suite de automatización se encuentra disponible
+en el repositorio público del proyecto.
+</p>
+
+<div class="link-buttons">
+
+<a href="https://github.com/JOH4444N/buggy-cars-rating"
+class="link-btn"
+target="_blank"
+rel="noopener noreferrer">
+
+<i class="fab fa-github"></i>
+Ver repositorio
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- REPORTES -->
+
+<div class="section">
+
+<h2><i class="fas fa-chart-bar"></i> Reportes Mochawesome</h2>
+
+<p>
+
+Los resultados de ejecución de las pruebas se publican automáticamente
+mediante GitHub Pages tras cada ejecución del pipeline CI/CD.
+
+</p>
+
+<div class="link-buttons">
+
+<a href="https://joh4444n.github.io/buggy-cars-rating/"
+class="link-btn"
+target="_blank"
+rel="noopener noreferrer">
+
+<i class="fas fa-chart-line"></i>
+Ver reportes de pruebas
+
+</a>
+
+</div>
+
+</div>
