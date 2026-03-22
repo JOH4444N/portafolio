@@ -145,21 +145,397 @@ margin-top:1rem;
 }
 
 @media(max-width:768px){
-
 .container{
 padding:0 1rem;
 }
-
 .header h1{
 font-size:1.8rem;
 }
-
 }
+
+
+/* ================================================
+   DESCRIPCIÓN — acordeón
+   ================================================ */
+
+.desc-summary {
+  font-size: 1rem;
+  color: #4a5568;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #f0fdf8;
+  border-left: 4px solid #64ffda;
+  border-radius: 0 10px 10px 0;
+}
+
+.accordion-item {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .85rem 1.1rem;
+  cursor: pointer;
+  background: #fff;
+  transition: background .2s;
+  user-select: none;
+}
+
+.accordion-header:hover {
+  background: #f7fbff;
+}
+
+.accordion-header.open {
+  background: #e8fdf7;
+  border-bottom: 1.5px solid #64ffda;
+}
+
+.acc-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.acc-icon {
+  font-size: 1rem;
+  color: #64ffda;
+  width: 20px;
+  text-align: center;
+}
+
+.accordion-header.open .acc-icon {
+  color: #0A192F;
+}
+
+.acc-title {
+  font-size: .9rem;
+  font-weight: 600;
+  color: #0A192F;
+}
+
+.acc-arrow {
+  font-size: .75rem;
+  color: #a0aec0;
+  transition: transform .25s;
+}
+
+.accordion-header.open .acc-arrow {
+  transform: rotate(180deg);
+  color: #0A192F;
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .25s;
+  background: #fff;
+  font-size: .9rem;
+  color: #2d3748;
+  line-height: 1.65;
+  padding: 0 1.1rem;
+}
+
+.accordion-body.open {
+  max-height: 400px;
+  padding: .9rem 1.1rem;
+}
+
+.accordion-body p {
+  margin: 0;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: .75rem;
+}
+
+.tag {
+  font-size: .75rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #0A192F;
+  color: #64ffda;
+  font-weight: 600;
+}
+
+
+/* ================================================
+   BUG REPORT
+   ================================================ */
+
+.br-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.br-stat {
+  font-size: .75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.stat-total   { background: #edf2f7; color: #4a5568; }
+.stat-auth    { background: #F5C4B3; color: #993C1D; }
+.stat-profile { background: #FAC775; color: #854F0B; }
+.stat-vote    { background: #9FE1CB; color: #085041; }
+
+.bug-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bug-row {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bug-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: .75rem 1rem;
+  cursor: pointer;
+  background: #fff;
+  transition: background .2s;
+  user-select: none;
+}
+
+.bug-trigger:hover { background: #f7fbff; }
+.bug-trigger.open  { background: #f0fdf8; border-bottom: 1.5px solid #9FE1CB; }
+
+.bug-id {
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  min-width: 72px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.id-coral { background: #F5C4B3; color: #993C1D; }
+.id-amber { background: #FAC775; color: #854F0B; }
+.id-teal  { background: #9FE1CB; color: #085041; }
+
+.bug-title {
+  font-size: .875rem;
+  color: #0A192F;
+  flex: 1;
+}
+
+.module-badge {
+  display: inline-block;
+  font-size: .68rem;
+  padding: 1px 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+  font-weight: 600;
+  background: #edf2f7;
+  color: #718096;
+}
+
+.bug-arrow {
+  font-size: .65rem;
+  color: #a0aec0;
+  transition: transform .25s;
+  flex-shrink: 0;
+}
+
+.bug-trigger.open .bug-arrow { transform: rotate(180deg); }
+
+.bug-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .2s;
+  background: #fff;
+  padding: 0 1rem;
+}
+
+.bug-detail.open {
+  max-height: 500px;
+  padding: .9rem 1rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media(max-width:600px) {
+  .detail-grid { grid-template-columns: 1fr; }
+  .acc-title   { font-size: .82rem; }
+  .bug-title   { font-size: .8rem; }
+}
+
+.detail-box {
+  border-radius: 8px;
+  padding: .75rem .9rem;
+}
+
+.box-expected { background: #EAF3DE; border-left: 3px solid #639922; }
+.box-actual   { background: #FCEBEB; border-left: 3px solid #E24B4A; }
+
+.detail-label {
+  font-size: .7rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.label-expected { color: #3B6D11; }
+.label-actual   { color: #A32D2D; }
+
+.detail-text {
+  font-size: .825rem;
+  line-height: 1.6;
+  color: #2d3748;
+  margin: 0;
+}
+
+.et-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 14px;
+}
+ 
+.et-card {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .2s, transform .2s;
+}
+ 
+.et-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+ 
+.et-card-header {
+  padding: 1rem 1.1rem 0.75rem;
+  border-bottom: 1.5px solid #e2e8f0;
+}
+ 
+.et-session-label {
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #a0aec0;
+  margin-bottom: 5px;
+}
+ 
+.et-module {
+  font-size: .95rem;
+  font-weight: 600;
+  color: #0A192F;
+  margin-bottom: 5px;
+}
+ 
+.et-charter-badge {
+  display: inline-block;
+  font-size: .7rem;
+  padding: 2px 9px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+ 
+.badge-s1 { background: #E1F5EE; color: #085041; }
+.badge-s2 { background: #E6F1FB; color: #0C447C; }
+.badge-s3 { background: #FAEEDA; color: #854F0B; }
+ 
+.et-card-body {
+  padding: .9rem 1.1rem;
+  flex: 1;
+}
+ 
+.et-label {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #a0aec0;
+  margin-bottom: 5px;
+}
+ 
+.et-objective {
+  font-size: .85rem;
+  color: #2d3748;
+  line-height: 1.6;
+  margin: 0;
+}
+ 
+.et-card-footer {
+  padding: .75rem 1.1rem;
+  border-top: 1.5px solid #e2e8f0;
+}
+ 
+.et-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0A192F;
+  color: #64ffda;
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+ 
+.et-btn:hover { opacity: .85; }
 
 </style>
 
 </head>
 
+<script>
+function toggleAcc(header) {
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  document.querySelectorAll('.accordion-header.open').forEach(h => {
+    h.classList.remove('open');
+    h.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    header.classList.add('open');
+    body.classList.add('open');
+  }
+}
+</script>
+
+<script>
+function toggleBug(trigger) {
+  const detail = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+  document.querySelectorAll('.bug-trigger.open').forEach(t => {
+    t.classList.remove('open');
+    t.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    trigger.classList.add('open');
+    detail.classList.add('open');
+  }
+}
+</script>
 
 <body>
 
@@ -192,42 +568,125 @@ Volver al portafolio
 <!-- DESCRIPCION -->
 
 <div class="section">
-
-<h2><i class="fas fa-info-circle"></i> Descripción del proyecto</h2>
-
-<p>
-
-Proyecto de automatización de pruebas funcionales sobre la plataforma Buggy Cars Rating, desarrollado con Cypress 15.  
-Se implementaron 8 Historias de Usuario con más de 50 casos de prueba cubriendo los flujos de registro, autenticación, gestión de perfil, navegación, votación y filtrado de automóviles.
-
-</p>
-
-<p>
-
-Se aplicó el patrón Page Object Model para separar la lógica de interacción de los casos de prueba, fixtures para centralizar los datos de prueba, y custom commands (cy.login(), cy.logout(), cy.navegarA()) para encapsular acciones reutilizables a lo largo de la suite.  
-
-En los flujos que involucran comunicación con el backend se utilizaron pruebas de integración mediante cy.intercept(), validando método HTTP, cuerpo del request y código de respuesta.
-
-</p>
-
-<p>
-
-La infraestructura de ejecución está montada sobre una máquina virtual Linux (Ubuntu 24.04) con Docker Engine instalado. Jenkins corre dentro de un contenedor Docker con acceso al socket del host mediante socket binding, permitiendo levantar contenedores hermanos desde el pipeline. Las pruebas se ejecutan en un contenedor efímero basado en la imagen oficial <strong>cypress/included:15.9.0</strong>, montando el workspace como volumen compartido.
-
-</p>
-
-<p>
-
-El pipeline declarativo en Jenkins automatiza el ciclo completo: instalación de dependencias, ejecución de pruebas, generación de reporte y publicación. Los resultados se procesan con Mochawesome y el reporte HTML se despliega automáticamente en GitHub Pages desde una rama dedicada, quedando accesible públicamente tras cada ejecución.
-
-</p>
-
-<p>
-
-El pipeline implementa manejo de errores con try/catch garantizando que el reporte se publique independientemente del resultado de los tests, marcando el build como FAILURE cuando alguna prueba falla.
-
-</p>
-
+ 
+  <h2><i class="fas fa-info-circle"></i> Descripción del proyecto</h2>
+ 
+  <p class="desc-summary">
+    Automatización de pruebas funcionales sobre Buggy Cars Rating con <strong>Cypress 15</strong> —
+    8 historias de usuario, más de 50 casos de prueba y pipeline CI/CD completo sobre Docker + Jenkins.
+  </p>
+ 
+  <div class="accordion" id="desc-accordion">
+ 
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">
+        <div class="acc-left">
+          <i class="fas fa-folder-open acc-icon"></i>
+          <span class="acc-title">Page Object Model & Fixtures</span>
+        </div>
+        <i class="fas fa-chevron-down acc-arrow"></i>
+      </div>
+      <div class="accordion-body">
+        <p>Se aplicó el patrón Page Object Model para separar la lógica de interacción de los casos de prueba.
+        Cada pantalla tiene su propia clase que encapsula selectores y métodos, haciendo la suite más mantenible
+        y escalable. Los fixtures centralizan todos los datos de prueba.</p>
+        <div class="tag-row">
+          <span class="tag">Page Objects</span>
+          <span class="tag">Fixtures</span>
+          <span class="tag">Separación de responsabilidades</span>
+          <span class="tag">Mantenibilidad</span>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">
+        <div class="acc-left">
+          <i class="fas fa-bolt acc-icon"></i>
+          <span class="acc-title">Custom Commands</span>
+        </div>
+        <i class="fas fa-chevron-down acc-arrow"></i>
+      </div>
+      <div class="accordion-body">
+        <p>Se crearon custom commands (cy.login(), cy.logout(), cy.navegarA()) para encapsular acciones
+        reutilizables a lo largo de toda la suite. Esto reduce duplicación de código y hace los tests más
+        legibles, describiendo flujos complejos en pocas líneas.</p>
+        <div class="tag-row">
+          <span class="tag">cy.login()</span>
+          <span class="tag">cy.logout()</span>
+          <span class="tag">cy.navegarA()</span>
+          <span class="tag">DRY principle</span>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">
+        <div class="acc-left">
+          <i class="fas fa-plug acc-icon"></i>
+          <span class="acc-title">Pruebas de integración con cy.intercept()</span>
+        </div>
+        <i class="fas fa-chevron-down acc-arrow"></i>
+      </div>
+      <div class="accordion-body">
+        <p>En los flujos que involucran comunicación con el backend se usó cy.intercept() para validar
+        método HTTP, cuerpo del request y código de respuesta. Esto garantiza que los contratos entre
+        frontend y API se cumplan correctamente en cada ejecución.</p>
+        <div class="tag-row">
+          <span class="tag">cy.intercept()</span>
+          <span class="tag">HTTP validation</span>
+          <span class="tag">Request body</span>
+          <span class="tag">Status codes</span>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">
+        <div class="acc-left">
+          <i class="fas fa-rocket acc-icon"></i>
+          <span class="acc-title">CI/CD — Jenkins + Docker</span>
+        </div>
+        <i class="fas fa-chevron-down acc-arrow"></i>
+      </div>
+      <div class="accordion-body">
+        <p>Infraestructura sobre Ubuntu 24.04 con Docker Engine. Jenkins corre en un contenedor con socket
+        binding al host, permitiendo levantar contenedores hermanos desde el pipeline. Las pruebas se ejecutan
+        en un contenedor efímero basado en cypress/included:15.9.0, montando el workspace como volumen compartido.</p>
+        <div class="tag-row">
+          <span class="tag">Ubuntu 24.04</span>
+          <span class="tag">Docker Engine</span>
+          <span class="tag">Jenkins container</span>
+          <span class="tag">Socket binding</span>
+          <span class="tag">cypress/included:15.9.0</span>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">
+        <div class="acc-left">
+          <i class="fas fa-chart-bar acc-icon"></i>
+          <span class="acc-title">Reportes Mochawesome & GitHub Pages</span>
+        </div>
+        <i class="fas fa-chevron-down acc-arrow"></i>
+      </div>
+      <div class="accordion-body">
+        <p>El pipeline declarativo automatiza el ciclo completo: instalación, ejecución, generación y publicación
+        del reporte. Los resultados se procesan con Mochawesome y el HTML se despliega en GitHub Pages desde una
+        rama dedicada tras cada ejecución. Un bloque try/catch garantiza que el reporte se publique aunque fallen
+        los tests, marcando el build como FAILURE.</p>
+        <div class="tag-row">
+          <span class="tag">Mochawesome</span>
+          <span class="tag">GitHub Pages</span>
+          <span class="tag">try/catch</span>
+          <span class="tag">FAILURE marking</span>
+          <span class="tag">Auto-deploy</span>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
 </div>
 
 <!-- HISTORIAS DE USUARIO -->
@@ -248,7 +707,6 @@ El pipeline implementa manejo de errores con try/catch garantizando que el repor
   </iframe>
 
 </div>
-
 
 <!-- PLAN DE PRUEBAS -->
 
@@ -283,11 +741,289 @@ de testing estructurada que cubre los flujos funcionales principales del sistema
 </p>
 
 <iframe
-src="https://docs.google.com/spreadsheets/d/e/TU_SHEET_ID/pubhtml?widget=true&headers=false"
+src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRvftsI5VKI0VvTTRFVN6OZqV13_jADqA6LZosflpN3ym3pMpFcaPqQ6RtRMVrpYIqNaW9RiGWOTsMb/pubhtml?gid=1483908109&single=true"
 width="100%"
 height="650">
 </iframe>
 
+</div>
+
+<!-- REPORT -->
+
+<div class="section">
+ 
+  <h2><i class="fas fa-bug"></i> Bug Report</h2>
+ 
+  <div class="br-stats">
+    <span class="br-stat stat-total">12 bugs reportados</span>
+    <span class="br-stat stat-auth">Autenticación</span>
+    <span class="br-stat stat-profile">Perfil / Password</span>
+    <span class="br-stat stat-vote">Votación</span>
+  </div>
+ 
+  <div class="bug-list">
+ 
+    <!-- BUG-001 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-001</span>
+        <span class="bug-title">Falla en cierre de sesión desde módulo Overall Rating <span class="module-badge">Autenticación</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe cerrar la sesión correctamente desde cualquier módulo. La barra de navegación debe mostrar la opción "Login" y no debe visualizarse el mensaje "Hi, username".</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema presenta un comportamiento inconsistente. Aunque en otros módulos el logout funciona correctamente, en el módulo "Overall Rating" el usuario permanece autenticado después de hacer clic en "Logout".</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-002 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-002</span>
+        <span class="bug-title">Falta de redirección después de Logout desde diferentes módulos <span class="module-badge">Autenticación</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe redirigir automáticamente al usuario a la página principal después de cerrar sesión desde cualquier módulo.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema no redirige al usuario después de hacer logout, permaneciendo en el módulo actual independientemente desde dónde se ejecute la acción.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-003 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-003</span>
+        <span class="bug-title">Campo Age permite caracteres no numéricos <span class="module-badge">Perfil</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe permitir únicamente valores numéricos enteros en el campo Age y rechazar cualquier otro tipo de carácter.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permite ingresar caracteres alfabéticos en el campo Age, evidenciando una falta de validación del tipo de dato.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-004 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-004</span>
+        <span class="bug-title">Campo Gender no es lista desplegable <span class="module-badge">Perfil</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El campo Gender debe mostrarse como una lista desplegable (dropdown) con opciones predefinidas para seleccionar.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El campo Gender se muestra como un input de texto, permitiendo al usuario ingresar valores manualmente en lugar de seleccionar de una lista.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-005 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-005</span>
+        <span class="bug-title">Reutilización de contraseña actual permitida <span class="module-badge">Password</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe validar que la nueva contraseña sea diferente a la actual, mostrando un mensaje de error y evitando la actualización.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permite actualizar la contraseña utilizando el mismo valor de la contraseña actual, evidenciando una falla en la validación de reutilización.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-006 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-006</span>
+        <span class="bug-title">Validación incorrecta de longitud mínima en el campo New Password <span class="module-badge">Password</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe validar que el campo "New Password" cumpla con la longitud mínima requerida (8 caracteres). El botón "Save" debe permanecer deshabilitado hasta cumplir todos los criterios.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permite ingresar y enviar una contraseña menor a 8 caracteres. El botón "Save" permanece habilitado, permitiendo una acción inválida.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-007 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-007</span>
+        <span class="bug-title">Validación incorrecta de mayúsculas en el campo New Password <span class="module-badge">Password</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe validar que el campo "New Password" incluya al menos una letra mayúscula. El botón "Save" debe permanecer deshabilitado hasta cumplir todos los criterios.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permite ingresar y enviar una contraseña sin letras mayúsculas. El botón "Save" permanece habilitado, permitiendo una acción inválida.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-008 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-008</span>
+        <span class="bug-title">Validación incorrecta de números en el campo New Password <span class="module-badge">Password</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe validar que el campo "New Password" incluya al menos un número. El botón "Save" debe permanecer deshabilitado hasta cumplir todos los criterios.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permite ingresar y enviar una contraseña sin números. El botón "Save" permanece habilitado, permitiendo una acción inválida.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-009 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-009</span>
+        <span class="bug-title">Validación incorrecta de caracteres especiales en el campo New Password <span class="module-badge">Password</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe validar que el campo "New Password" incluya al menos un carácter especial. El botón "Save" debe permanecer deshabilitado hasta cumplir todos los criterios.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permite ingresar y enviar una contraseña sin caracteres especiales. El botón "Save" permanece habilitado, permitiendo una acción inválida.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-010 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-010</span>
+        <span class="bug-title">Mensaje de error incorrecto en campo Current Password vacío <span class="module-badge">Password</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe impedir el cambio de contraseña y mostrar un mensaje claro indicando que el campo "Current Password" es obligatorio.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema no permite el cambio pero muestra un mensaje genérico: "Invalid parameters", el cual no describe correctamente la causa del error.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-011 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-011</span>
+        <span class="bug-title">Mensaje incorrecto cuando campos de contraseña están vacíos <span class="module-badge">Password</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir el cambio. El botón "Save" debe permanecer deshabilitado y mostrar un mensaje claro indicando los campos obligatorios faltantes.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema no completa el cambio pero muestra un mensaje incorrecto indicando que las contraseñas no coinciden, en lugar de informar que los campos son obligatorios.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- BUG-012 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-teal">BUG-012</span>
+        <span class="bug-title">Votación múltiple permitida <span class="module-badge">Votación</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe permitir registrar únicamente un voto por usuario. Después del primer voto, no debe permitir votar nuevamente ni mostrar la opción de voto.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permite registrar múltiples votos en diferentes automóviles, incumpliendo la restricción de un solo voto por usuario.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </div><!-- /bug-list -->
+ 
+  <div style="margin-top:1.5rem;">
+    <a href="../docs/report.pdf" class="link-btn" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-file-pdf"></i>
+      Ver reporte completo
+    </a>
+  </div>
+ 
 </div>
 
 
@@ -295,21 +1031,67 @@ height="650">
 <!-- EXPLORATORY TESTING -->
 
 <div class="section">
-
-<h2><i class="fas fa-search"></i> Exploratory Testing</h2>
-
-<p>
-Documento con escenarios exploratorios ejecutados para identificar
-comportamientos inesperados, problemas de usabilidad y defectos
-fuera de los flujos previamente definidos.
-</p>
-
-<iframe
-src="../docs/exploratory-testing-buggy.pdf"
-width="100%"
-height="650">
-</iframe>
-
+ 
+  <h2><i class="fas fa-search"></i> Exploratory Testing</h2>
+ 
+  <div class="et-grid">
+ 
+    <!-- SESIÓN 01 -->
+    <div class="et-card">
+      <div class="et-card-header">
+        <div class="et-session-label">Sesión 01</div>
+        <div class="et-module">Registro de usuario</div>
+        <span class="et-charter-badge badge-s1">Register</span>
+      </div>
+      <div class="et-card-body">
+        <div class="et-label">Objetivo</div>
+        <p class="et-objective">Identificar defectos relacionados con validaciones de entrada, restricciones de negocio y comportamiento inesperado del formulario de registro.</p>
+      </div>
+      <div class="et-card-footer">
+        <a class="et-btn" href="../docs/XTSessionReport-Register.html" target="_blank" rel="noopener noreferrer">
+          Ver sesión <i class="fas fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+ 
+    <!-- SESIÓN 02 -->
+    <div class="et-card">
+      <div class="et-card-header">
+        <div class="et-session-label">Sesión 02</div>
+        <div class="et-module">Actualización de perfil</div>
+        <span class="et-charter-badge badge-s2">Update Profile</span>
+      </div>
+      <div class="et-card-body">
+        <div class="et-label">Objetivo</div>
+        <p class="et-objective">Identificar defectos relacionados con validaciones de formularios, restricciones de datos, persistencia de información y comportamiento inesperado en la edición del perfil.</p>
+      </div>
+      <div class="et-card-footer">
+        <a class="et-btn" href="../docs/XTSessionReport-UpdateProfile.html" target="_blank" rel="noopener noreferrer">
+          Ver sesión <i class="fas fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+ 
+    <!-- SESIÓN 03 -->
+    <div class="et-card">
+      <div class="et-card-header">
+        <div class="et-session-label">Sesión 03</div>
+        <div class="et-module">Tabla de clasificación</div>
+        <span class="et-charter-badge badge-s3">Overall Rating</span>
+      </div>
+      <div class="et-card-body">
+        <div class="et-label">Objetivo</div>
+        <p class="et-objective">Identificar defectos en navegación entre vistas, ordenamiento de columnas, consistencia de datos, paginación e integridad de datos dinámicos en la tabla.</p>
+      </div>
+      <div class="et-card-footer">
+        <a class="et-btn" href="../docs/XTSessionReport-TableOverallRating.html" target="_blank" rel="noopener noreferrer">
+          Ver sesión <i class="fas fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+ 
+  </div>
+ 
 </div>
 
 
