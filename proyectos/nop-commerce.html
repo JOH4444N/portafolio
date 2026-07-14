@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>nopCommerce – Manual QA Testing | Johan Ballen</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;line-height:1.6;color:#0f1724;background:#fbfdff;}
+.container{max-width:1100px;margin:auto;padding:0 2rem;}
+.header{background:#0A192F;color:white;padding:2.5rem 0;text-align:center;}
+.header h1{font-size:2.3rem;color:#64ffda;margin-bottom:.4rem;}
+.header p{opacity:.85;}
+.content{padding:3rem 0;}
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;background:#64ffda;color:#0A192F;padding:.7rem 1.4rem;border-radius:8px;text-decoration:none;font-weight:600;margin-bottom:2rem;transition:.3s;}
+.back-btn:hover{background:#4db6ac;transform:translateY(-2px);}
+.section{background:white;padding:2rem;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.08);margin-bottom:2rem;}
+.section h2{font-size:1.6rem;margin-bottom:1.2rem;border-bottom:3px solid #64ffda;padding-bottom:.4rem;color:#0A192F;}
+.section p{margin-bottom:1rem;}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem;}
+.overview-item{background:#f7fbff;padding:1.3rem;border-radius:10px;text-align:center;}
+.overview-item i{font-size:1.7rem;color:#64ffda;margin-bottom:.6rem;}
+.link-buttons{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.2rem;}
+.link-btn{display:inline-flex;align-items:center;gap:.5rem;background:#0A192F;color:white;padding:.7rem 1.2rem;border-radius:8px;text-decoration:none;font-weight:600;transition:.25s;}
+.link-btn:hover{background:#64ffda;color:#0A192F;transform:translateY(-2px);}
+iframe{border:none;border-radius:10px;margin-top:1rem;}
+
+@media(max-width:768px){
+.container{padding:0 1rem;}
+.header h1{font-size:1.8rem;}
+}
+
+/* ================================================
+   DESCRIPCIÓN
+================================================ */
+
+.desc-summary{font-size:1rem;color:#4a5568;line-height:1.65;margin-bottom:1.5rem;padding:1rem 1.25rem;background:#f0fdf8;border-left:4px solid #64ffda;border-radius:0 10px 10px 0;}
+.accordion-item{border:1.5px solid #e2e8f0;border-radius:12px;margin-bottom:8px;overflow:hidden;}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;cursor:pointer;background:#fff;transition:.2s;}
+.accordion-header:hover{background:#f7fbff;}
+.accordion-header.open{background:#e8fdf7;border-bottom:1.5px solid #64ffda;}
+.acc-left{display:flex;align-items:center;gap:10px;}
+.acc-icon{color:#64ffda;width:20px;text-align:center;}
+.acc-title{font-weight:600;color:#0A192F;}
+.acc-arrow{font-size:.75rem;transition:.25s;}
+.accordion-header.open .acc-arrow{transform:rotate(180deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0 1.1rem;}
+.accordion-body.open{max-height:400px;padding:.9rem 1.1rem;}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:.8rem;}
+.tag{font-size:.75rem;padding:4px 10px;border-radius:20px;background:#0A192F;color:#64ffda;font-weight:600;}
+
+
+/* ================================================
+   BUG REPORT — agregar al final del bloque <style>
+================================================ */
+
+.br-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.br-stat {
+  font-size: .75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.stat-total   { background: #edf2f7; color: #4a5568; }
+.stat-auth    { background: #F5C4B3; color: #993C1D; }
+.stat-profile { background: #FAC775; color: #854F0B; }
+.stat-vote    { background: #9FE1CB; color: #085041; }
+.stat-cart    { background: #FAC775; color: #854F0B; }
+.stat-account { background: #EEEDFE; color: #3C3489; }
+
+.bug-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bug-row {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bug-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: .75rem 1rem;
+  cursor: pointer;
+  background: #fff;
+  transition: background .2s;
+  user-select: none;
+}
+
+.bug-trigger:hover { background: #f7fbff; }
+.bug-trigger.open  { background: #f0fdf8; border-bottom: 1.5px solid #9FE1CB; }
+
+.bug-id {
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  min-width: 72px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.id-coral { background: #F5C4B3; color: #993C1D; }
+.id-amber { background: #FAC775; color: #854F0B; }
+.id-teal  { background: #9FE1CB; color: #085041; }
+
+.bug-title {
+  font-size: .875rem;
+  color: #0A192F;
+  flex: 1;
+}
+
+.module-badge {
+  display: inline-block;
+  font-size: .68rem;
+  padding: 1px 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+  font-weight: 600;
+  background: #edf2f7;
+  color: #718096;
+}
+
+.bug-arrow {
+  font-size: .65rem;
+  color: #a0aec0;
+  transition: transform .25s;
+  flex-shrink: 0;
+}
+
+.bug-trigger.open .bug-arrow { transform: rotate(180deg); }
+
+.bug-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .2s;
+  background: #fff;
+  padding: 0 1rem;
+}
+
+.bug-detail.open {
+  max-height: 500px;
+  padding: .9rem 1rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media(max-width:600px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}
+
+.detail-box {
+  border-radius: 8px;
+  padding: .75rem .9rem;
+}
+
+.box-expected { background: #EAF3DE; border-left: 3px solid #639922; }
+.box-actual   { background: #FCEBEB; border-left: 3px solid #E24B4A; }
+
+.detail-label {
+  font-size: .7rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.label-expected { color: #3B6D11; }
+.label-actual   { color: #A32D2D; }
+
+.detail-text {
+  font-size: .825rem;
+  line-height: 1.6;
+  color: #2d3748;
+  margin: 0;
+}
+</style>
+
+<script>
+function toggleBug(trigger) {
+  const detail = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+  document.querySelectorAll('.bug-trigger.open').forEach(t => {
+    t.classList.remove('open');
+    t.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    trigger.classList.add('open');
+    detail.classList.add('open');
+  }
+}
+</script>
+
+
+<script>
+function toggleAcc(header){
+  const body=header.nextElementSibling;
+  const isOpen=header.classList.contains("open");
+  document.querySelectorAll(".accordion-header.open").forEach(h=>{
+    h.classList.remove("open");
+    h.nextElementSibling.classList.remove("open");
+  });
+  if(!isOpen){
+    header.classList.add("open");
+    body.classList.add("open");
+  }
+}
+</script>
+
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container">
+    <h1>nopCommerce – Manual QA Testing</h1>
+    <p>Proyecto de pruebas manuales sobre una plataforma e-commerce basado en criterios de aceptación.</p>
+  </div>
+</header>
+
+<main class="content">
+<div class="container">
+
+  <a href="../index.html" class="back-btn">
+    <i class="fas fa-arrow-left"></i>
+    Volver al portafolio
+  </a>
+
+  <!-- DESCRIPCIÓN -->
+  <div class="section">
+
+    <h2><i class="fas fa-info-circle"></i> Descripción del proyecto</h2>
+
+    <p class="desc-summary">
+      Proyecto de aseguramiento de la calidad sobre la plataforma
+      <strong>nopCommerce</strong>, enfocado exclusivamente en
+      <strong>pruebas manuales</strong>.
+      Se diseñaron y ejecutaron 
+      <strong>160 casos de prueba</strong>
+      distribuidos en
+      <strong>5 épicas</strong> y
+      <strong>11 historias de usuario</strong>,
+      validando los principales procesos funcionales mediante pruebas funcionales,
+      de regresión y exploratorias.
+    </p>
+
+    <div class="accordion">
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="acc-left">
+            <i class="fas fa-clipboard-check acc-icon"></i>
+            <span class="acc-title">Estrategia de pruebas</span>
+          </div>
+          <i class="fas fa-chevron-down acc-arrow"></i>
+        </div>
+        <div class="accordion-body">
+          <p>La estrategia de pruebas se definió tomando como base los criterios de aceptación de cada historia de usuario. Se ejecutaron pruebas funcionales, pruebas de regresión y sesiones de pruebas exploratorias para validar el correcto funcionamiento de los procesos críticos del sistema.</p>
+          <div class="tag-row">
+            <span class="tag">Pruebas Manuales</span>
+            <span class="tag">Pruebas Funcionales</span>
+            <span class="tag">Regresión</span>
+            <span class="tag">Exploratorias</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="acc-left">
+            <i class="fas fa-list-check acc-icon"></i>
+            <span class="acc-title">Diseño de Casos de Prueba</span>
+          </div>
+          <i class="fas fa-chevron-down acc-arrow"></i>
+        </div>
+        <div class="accordion-body">
+          <p>Los casos de prueba fueron elaborados a partir de las historias de usuario y sus criterios de aceptación, cubriendo escenarios positivos, negativos, validaciones de reglas de negocio y manejo de errores para garantizar una adecuada cobertura funcional.</p>
+          <div class="tag-row">
+            <span class="tag">100+ Test Cases</span>
+            <span class="tag">Escenarios Positivos</span>
+            <span class="tag">Escenarios Negativos</span>
+            <span class="tag">Criterios de aceptación</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="acc-left">
+            <i class="fas fa-bug acc-icon"></i>
+            <span class="acc-title">Gestión de Defectos</span>
+          </div>
+          <i class="fas fa-chevron-down acc-arrow"></i>
+        </div>
+        <div class="accordion-body">
+          <p>Durante la ejecución de las pruebas se registraron los defectos encontrados, documentando pasos para reproducir, resultado esperado, resultado obtenido, severidad, prioridad y evidencia correspondiente para facilitar su análisis y posterior corrección por parte del equipo de desarrollo.</p>
+          <div class="tag-row">
+            <span class="tag">Bug Report</span>
+            <span class="tag">Severidad</span>
+            <span class="tag">Prioridad</span>
+            <span class="tag">Evidencias</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="acc-left">
+            <i class="fas fa-layer-group acc-icon"></i>
+            <span class="acc-title">Cobertura Funcional</span>
+          </div>
+          <i class="fas fa-chevron-down acc-arrow"></i>
+        </div>
+        <div class="accordion-body">
+          <p>El proyecto contempló la validación funcional de los módulos más importantes de la plataforma nopCommerce, incluyendo el registro de usuarios, autenticación, catálogo de productos, carrito de compras y proceso de checkout, garantizando el cumplimiento de los criterios de aceptación.</p>
+          <div class="tag-row">
+            <span class="tag">Registro</span>
+            <span class="tag">Login</span>
+            <span class="tag">Catálogo</span>
+            <span class="tag">Carrito</span>
+            <span class="tag">Checkout</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- HISTORIAS DE USUARIO -->
+  <div class="section">
+
+    <h2><i class="fas fa-book-open"></i> Historias de Usuario</h2>
+
+    <p>
+      El documento contiene las <strong>11 historias de usuario</strong> organizadas en
+      <strong>5 épicas</strong>, junto con sus respectivos criterios de aceptación,
+      los cuales sirvieron como base para el diseño de los casos de prueba.
+    </p>
+
+    <iframe
+      src="../docs/nop-commerce/HU-nop-commerce.pdf"
+      width="100%"
+      height="700">
+    </iframe>
+
+  </div>
+
+
+  <!-- PLAN DE PRUEBAS -->
+  <div class="section">
+
+    <h2><i class="fas fa-file-pdf"></i> Plan de Pruebas</h2>
+
+    <p>
+      El plan de pruebas describe el alcance del proyecto, objetivos, estrategia de pruebas,
+      tipos de prueba ejecutados, criterios de entrada y salida, riesgos identificados, entre otros.
+    </p>
+
+    <iframe
+      src="../docs/nop-commerce/plan-pruebas-nop-commerce.pdf"
+      width="100%"
+      height="700">
+    </iframe>
+
+  </div>
+
+
+  <!-- CASOS DE PRUEBA -->
+  <div class="section">
+
+    <h2><i class="fas fa-table"></i> Casos de Prueba</h2>
+
+    <p>
+      Se diseñaron y ejecutaron <strong>más de 100 casos de prueba</strong>,
+      basados en los criterios de aceptación de las historias de usuario,
+      cubriendo escenarios positivos, negativos, validaciones de negocio
+      y pruebas de regresión.
+    </p>
+
+    <iframe
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSohhiU-A56z_8Dzo8JxSZqpeVhE80i2rx_XWR8DesIAj1DCcJX2RHxZnAr1NsQ0LbGTOFn3E81GlEO/pubhtml"
+      width="100%"
+      height="700">
+    </iframe>
+
+  </div>
+
+
+<!-- REPORT -->
+<div class="section">
+
+  <h2><i class="fas fa-bug"></i> Bug Report</h2>
+
+  <div class="br-stats">
+    <span class="br-stat stat-total">13 bugs reportados</span>
+    <span class="br-stat stat-auth">Autenticación</span>
+    <span class="br-stat stat-profile">Registro</span>
+    <span class="br-stat stat-cart">Carrito</span>
+    <span class="br-stat stat-account">Mi Cuenta</span>
+  </div>
+
+  <div class="bug-list">
+
+    <!-- BUG-001 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-teal">BUG-001</span>
+        <span class="bug-title">No existe acceso visible al módulo de comparación de productos <span class="module-badge">Navegación</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe permitir acceder correctamente al módulo de comparación de productos mediante una opción visible y accesible desde la interfaz principal.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">No se encontró una opción visible para acceder al módulo de comparación de productos desde la interfaz del sistema.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-002 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-002</span>
+        <span class="bug-title">Presencia de enlace de noticias en la sección de redes sociales del footer <span class="module-badge">Footer</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema debe mostrar únicamente enlaces correspondientes a redes sociales oficiales dentro de la sección de redes sociales del footer, redirigiendo correctamente a sus respectivas páginas.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">Los enlaces de redes sociales funcionan correctamente; sin embargo, se identificó un enlace de noticias dentro de la sección, el cual no corresponde a una red social.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-003 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-003</span>
+        <span class="bug-title">Registro exitoso con contraseña sin símbolos especiales <span class="module-badge">Registro</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir el registro si la contraseña no cumple las reglas de complejidad definidas, incluyendo el uso de símbolos especiales.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permitió realizar el registro exitosamente con una contraseña que no contiene símbolos especiales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-004 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-004</span>
+        <span class="bug-title">Registro exitoso con contraseña sin números <span class="module-badge">Registro</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir el registro si la contraseña no cumple las reglas de complejidad definidas, incluyendo el uso obligatorio de números.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permitió realizar el registro exitosamente con una contraseña que no contiene números.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-005 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-005</span>
+        <span class="bug-title">Registro exitoso con contraseña sin letras mayúsculas <span class="module-badge">Registro</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir el registro si la contraseña no cumple las reglas de complejidad definidas, incluyendo el uso obligatorio de letras mayúsculas.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permitió realizar el registro exitosamente con una contraseña que no contiene letras mayúsculas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-006 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-006</span>
+        <span class="bug-title">Ausencia de validación al dejar el campo Password vacío en login <span class="module-badge">Autenticación</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir iniciar sesión y debe mostrar un mensaje de validación indicando que el campo Password es obligatorio.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema no permitió iniciar sesión; sin embargo, no mostró el mensaje de validación correspondiente para el campo Password vacío.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-007 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-007</span>
+        <span class="bug-title">Ausencia de mensaje de error al ingresar contraseña incorrecta en login <span class="module-badge">Autenticación</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir iniciar sesión y debe mostrar un mensaje indicando que las credenciales ingresadas son incorrectas.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema no permitió iniciar sesión; sin embargo, no mostró un mensaje indicando que la contraseña ingresada es incorrecta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-009 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-teal">BUG-009</span>
+        <span class="bug-title">Se permite agregar un producto duplicado a la lista de comparación <span class="module-badge">Comparación</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir agregar un producto que ya se encuentra en la lista de comparación y debe mostrar un mensaje indicando que el producto ya fue agregado.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permitió agregar nuevamente el mismo producto a la lista de comparación, sin mostrar ningún mensaje de validación.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-010 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-010</span>
+        <span class="bug-title">Eliminación automática del producto al ingresar una cantidad inválida <span class="module-badge">Carrito</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir actualizar el carrito con una cantidad inválida y debe mostrar un mensaje de validación indicando el error, manteniendo el producto en el carrito.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema no mostró ningún mensaje de validación y eliminó automáticamente el producto del carrito al ingresar una cantidad inválida (0 o valor negativo).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-011 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-amber">BUG-011</span>
+        <span class="bug-title">Actualización automática de cantidad al superar el stock disponible <span class="module-badge">Carrito</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir actualizar la cantidad por encima del stock disponible y debe mostrar un mensaje de validación indicando que la cantidad solicitada excede el inventario.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema no mostró ningún mensaje de validación y actualizó automáticamente la cantidad del producto a 1 sin explicación al usuario.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-012 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-012</span>
+        <span class="bug-title">Cambio exitoso de contraseña sin letra mayúscula <span class="module-badge">Mi Cuenta</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir cambiar la contraseña e informar que esta debe contener al menos una letra mayúscula, de acuerdo con las reglas de complejidad establecidas.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permitió cambiar la contraseña exitosamente sin incluir una letra mayúscula.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-013 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-013</span>
+        <span class="bug-title">Cambio exitoso de contraseña sin números <span class="module-badge">Mi Cuenta</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir cambiar la contraseña e informar que esta debe contener al menos un número, de acuerdo con las reglas de complejidad establecidas.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permitió cambiar la contraseña exitosamente sin incluir ningún número.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG-014 -->
+    <div class="bug-row">
+      <div class="bug-trigger" onclick="toggleBug(this)">
+        <span class="bug-id id-coral">BUG-014</span>
+        <span class="bug-title">Cambio exitoso de contraseña sin caracteres especiales <span class="module-badge">Mi Cuenta</span></span>
+        <i class="fas fa-chevron-down bug-arrow"></i>
+      </div>
+      <div class="bug-detail">
+        <div class="detail-grid">
+          <div class="detail-box box-expected">
+            <div class="detail-label label-expected">Resultado esperado</div>
+            <p class="detail-text">El sistema no debe permitir cambiar la contraseña e informar que esta debe contener al menos un carácter especial, de acuerdo con las reglas de complejidad establecidas.</p>
+          </div>
+          <div class="detail-box box-actual">
+            <div class="detail-label label-actual">Resultado actual</div>
+            <p class="detail-text">El sistema permitió cambiar la contraseña exitosamente sin incluir ningún carácter especial.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /bug-list -->
+
+  <div style="margin-top:1.5rem;">
+    <a href="../docs/nop-commerce/Bug-Report.pdf" class="link-btn" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-file-pdf"></i>
+      Ver reporte completo
+    </a>
+  </div>
+
+</div>
+
+
+
+
+</div>
+</main>
+
+</body>
+</html>
